@@ -80,7 +80,7 @@ const convertToQuadrillion = (value: BigNumber): FormattedNumber => {
     return { value: '> 1Q', unit: FormattedNumberUnit.Q, tooltipText: value.toFormat() }
 }
 
-export const getRoundNumber = (value: BigNumber, round: number, dp: number): FormattedNumber => {
+export const getRoundNumber = (value: BigNumber, round: number, dp: any): FormattedNumber => {
     return { value: value.toFormat(Math.min(round, dp)), tooltipText: dp > round ? value.toFormat() : undefined }
 }
 
@@ -477,7 +477,7 @@ export const formatUsdValue = (value: BigNumber): FormattedNumber => {
      * Return: rounded number up to 2 decimal points and tolltip if > 2 decimal points"
      */
     if (value.isGreaterThan(SmallUsdBreakpoint)) {
-        return { value: `$${value.toFormat(2)}`, unit, tooltipText: value.decimalPlaces() > 2 ? `$${value.toFormat()}` : undefined }
+        return { value: `$${value.toFormat(2)}`, unit, tooltipText: value && value.decimalPlaces() > 2 ? `$${value.toFormat()}` : undefined }
     }
 
     /**
